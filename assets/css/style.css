@@ -62,7 +62,7 @@
 
 body {
     font-family: 'Poppins', Arial, sans-serif;
-    background-color: #F7ECE0;
+    background-color: #1e1d1d;
     color: #4B3923; /* Cor Secundária/Texto */
     margin: 0;
     padding: 0;
@@ -88,7 +88,7 @@ a:hover {
 /* === CABEÇALHO (HEADER) E NAVEGAÇÃO === */
 
 #site-header {
-    background-color: #F7ECE0;
+    background-color: #1e1d1d;
     padding: 40px 20px 20px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -173,7 +173,7 @@ a:hover {
     padding: 20px;
     border: 1px solid #D9D9D9;
     border-radius: 15px;
-    background-color: #FFFFFF;
+    background-color: #e6c099;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
