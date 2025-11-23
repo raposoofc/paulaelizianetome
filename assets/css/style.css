@@ -1,0 +1,765 @@
+/*
+ * ARQUIVO ÚNICO: ./assets/css/style.css
+ * ESTILOS GLOBAIS, INDEX, AGENDAMENTO, SERVIÇOS, CONTATO, DEPOIMENTOS, DICAS E PRODUTOS.
+ */
+
+/* === VARIÁVEIS DE COR UTILIZADAS (Para referência) === */
+/* Cor Primária/Destaque: #735A33 (Marrom Dourado Forte - Base da Logo) */
+/* Cor Secundária/Texto: #4B3923 (Marrom Escuro Profundo) */
+/* Fundo Principal: #F7ECE0 */
+/* Cinza Claro: #D9D9D9 */
+/* Branco: #FFFFFF */
+/* Preto: #000000 */
+
+/* === ANIMAÇÕES E ESTILOS DA SPLASH SCREEN (CARREGAMENTO) === */
+
+/* 1. Tela que cobre o viewport */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #F7ECE0; /* Fundo Principal */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease-out; /* Duração do fade-out */
+}
+
+#splash-screen.fade-out {
+    opacity: 0;
+}
+
+/* 2. Conteúdo principal invisível até a splash screen sair */
+.main-content {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.main-content.loaded {
+    opacity: 1;
+}
+
+/* 3. Animação do logo (ícone) */
+#splash-logo {
+    animation: pulse 1s infinite alternate; /* Animação de pulsar */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+
+/* === ESTILOS GLOBAIS === */
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #F7ECE0;
+    color: #4B3923; /* Cor Secundária/Texto */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #4B3923; /* Cor Secundária/Texto */
+    font-family: 'Ruda', sans-serif;
+    margin-bottom: 0.5em;
+}
+
+a {
+    color: #735A33; /* Cor Primária/Destaque */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #4B3923; /* Cor Secundária/Texto */
+}
+
+/* === CABEÇALHO (HEADER) E NAVEGAÇÃO === */
+
+#site-header {
+    background-color: #F7ECE0;
+    padding: 40px 20px 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#logo-principal {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #735A33; /* Cor Primária/Destaque */
+}
+
+.greeting {
+    font-family: 'Shadow Script', cursive;
+    font-size: 1.5em;
+    color: #4B3923; /* Cor Secundária/Texto */
+    margin: 0 0 5px 0;
+}
+
+#site-header h1 {
+    font-size: 2em;
+    margin: 0 0 10px 0;
+    color: #4B3923; /* Cor Secundária/Texto */
+}
+
+.cta-button {
+    background-color: #735A33; /* Cor Primária/Destaque */
+    color: #FFFFFF;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cta-button:hover {
+    background-color: #5C4829; /* Cor Primária ligeiramente mais escura */
+    transform: translateY(-2px);
+    color: #FFFFFF;
+}
+
+/* Navegação */
+.back-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #4B3923; /* Cor Secundária/Texto */
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+.back-link:hover {
+    color: #735A33; /* Cor Primária/Destaque */
+}
+
+/* Grid de Navegação (index.html) */
+
+#navigation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#navigation-grid .nav-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #D9D9D9;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#navigation-grid .nav-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    border-color: #735A33; /* Cor Primária/Destaque */
+}
+
+#navigation-grid .nav-card .card-icon {
+    color: #735A33; /* Cor Primária/Destaque */
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+#navigation-grid .nav-card .card-label {
+    font-weight: 700;
+    color: #4B3923; /* Cor Secundária/Texto */
+}
+
+/* Ajuste para o último item (Depoimentos) no grid ímpar */
+#navigation-grid a:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+/* === PÁGINA DE AGENDAMENTO (agendamento.html) === */
+
+#booking-main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#booking-form fieldset {
+    border: 1px solid #D9D9D9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#booking-form legend {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #735A33; /* Cor Primária/Destaque */
+    padding: 0 10px;
+    margin-left: -10px;
+}
+
+.booking-step {
+    display: none;
+}
+
+.booking-step.active {
+    display: block;
+}
+
+.service-option {
+    display: block;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.service-option:hover {
+    background-color: #F0EAD6; /* Cor ligeiramente mais clara que o Fundo Principal */
+}
+
+.service-option input[type="radio"]:checked + span,
+.service-option input[type="radio"]:checked {
+    color: #735A33; /* Cor Primária/Destaque */
+}
+
+.summary {
+    background-color: #F7ECE0;
+    border-left: 5px solid #735A33; /* Cor Primária/Destaque */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.summary h3 {
+    margin-top: 0;
+    color: #4B3923; /* Cor Secundária/Texto */
+}
+
+.summary strong {
+    color: #735A33; /* Cor Primária/Destaque */
+    font-weight: 700;
+}
+
+.step-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.step-navigation button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+.step-navigation button:first-child {
+    background-color: #D9D9D9;
+    color: #4B3923; /* Cor Secundária/Texto */
+}
+
+.step-navigation button:last-child,
+.step-navigation button[type="submit"] {
+    background-color: #4B3923; /* Cor Secundária/Texto */
+    color: #FFFFFF;
+}
+
+.step-navigation button:hover:not(:disabled) {
+    background-color: #735A33; /* Cor Primária/Destaque */
+    color: #FFFFFF;
+}
+
+.step-navigation button:disabled {
+    background-color: #D9D9D9;
+    color: #A0A0A0;
+    cursor: not-allowed;
+}
+
+/* Estilos de horário e data */
+input[type="date"] {
+    padding: 10px;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+#available-times {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#available-times button {
+    padding: 10px 5px;
+    border: 1px solid #735A33; /* Cor Primária/Destaque */
+    background-color: #FFFFFF;
+    color: #4B3923; /* Cor Secundária/Texto */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#available-times button:hover {
+    background-color: #F0EAD6;
+}
+
+#available-times button.selected {
+    background-color: #735A33; /* Cor Primária/Destaque */
+    color: #FFFFFF;
+    font-weight: 700;
+    border-color: #735A33; /* Cor Primária/Destaque */
+}
+
+/* Mensagem de sucesso */
+#confirmation-message {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #735A33; /* Cor Primária/Destaque */
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#confirmation-message h2 {
+    color: #735A33; /* Cor Primária/Destaque */
+    font-size: 1.8em;
+}
+
+#confirmation-message .fa-check-circle {
+    margin-right: 10px;
+}
+
+.new-booking-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #4B3923; /* Cor Secundária/Texto */
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.new-booking-btn:hover {
+    background-color: #735A33; /* Cor Primária/Destaque */
+}
+
+
+/* === PÁGINA DE SERVIÇOS (servicos.html) === */
+
+#services-main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.service-category h2 {
+    border-left: 5px solid #735A33; /* Cor Primária/Destaque */
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.service-item {
+    background-color: #FFFFFF;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.service-item h3 {
+    margin: 0 0 5px 0;
+    color: #735A33; /* Cor Primária/Destaque */
+    font-size: 1.1em;
+}
+
+.service-item .description {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.service-item .details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #D9D9D9;
+}
+
+.service-item .details .price {
+    font-weight: 700;
+    color: #735A33; /* Cor Primária/Destaque */
+    font-size: 1.2em;
+}
+
+.service-item .details .duration {
+    font-size: 0.9em;
+    color: #4B3923; /* Cor Secundária/Texto */
+}
+
+.service-item .schedule-btn {
+    display: block;
+    text-align: center;
+    background-color: #735A33; /* Cor Primária/Destaque */
+    color: #FFFFFF;
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.service-item .schedule-btn:hover {
+    background-color: #5C4829; /* Cor Primária mais escura */
+    color: #FFFFFF;
+}
+
+/* === PÁGINA DE CONTATO (contato.html) === */
+
+#contact-main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.contact-section {
+    background-color: #FFFFFF;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.contact-section h2 {
+    color: #735A33; /* Cor Primária/Destaque */
+    border-bottom: 2px solid #D9D9D9;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.social-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-list li {
+    width: 100%;
+}
+
+.social-icon-btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.social-icon-btn i {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+.social-icon-btn:hover {
+    opacity: 0.9;
+    color: #FFFFFF;
+}
+
+.social-icon-btn.whatsapp {
+    background-color: #25D366; 
+}
+
+.social-icon-btn.instagram {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+}
+
+.social-icon-btn.phone {
+    background-color: #735A33; /* Cor Primária/Destaque */
+}
+
+.address {
+    font-size: 1em;
+    color: #4B3923; /* Cor Secundária/Texto */
+    margin-bottom: 15px;
+}
+
+.address small {
+    display: block;
+    color: #666;
+    margin-top: 5px;
+}
+
+.map-container {
+    height: 250px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* === PÁGINA DE DEPOIMENTOS (depoimentos.html) === */
+
+#testimonials-main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#testimonial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.testimonial-card {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #D9D9D9;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.client-name {
+    font-weight: 700;
+    color: #4B3923; /* Cor Secundária/Texto */
+    font-size: 1.1em;
+}
+
+.rating i.fa-star {
+    color: #735A33; /* Cor Primária/Destaque */
+}
+
+.testimonial-quote {
+    font-style: italic;
+    color: #4B3923; /* Cor Secundária/Texto */
+    margin: 10px 0;
+}
+
+.service-type {
+    display: block;
+    font-size: 0.85em;
+    color: #735A33; /* Cor Primária/Destaque */
+    margin-top: 10px;
+}
+
+.menu-btn {
+    display: block;
+    text-align: center;
+    background-color: #4B3923; /* Cor Secundária/Texto */
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.menu-btn:hover {
+    background-color: #735A33; /* Cor Primária/Destaque */
+}
+
+/* === PÁGINA DE DICAS (dicas.html) === */
+
+#tips-main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#tip-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tip-post {
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.tip-post .post-thumb {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.tip-post .post-content {
+    flex-grow: 1;
+}
+
+.tip-post h3 {
+    font-size: 1em;
+    margin: 0 0 5px 0;
+    color: #735A33; /* Cor Primária/Destaque */
+}
+
+.tip-post .summary {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0 0 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tip-post .read-more {
+    font-weight: 700;
+    color: #735A33; /* Cor Primária/Destaque */
+}
+
+.tip-post .post-meta {
+    font-size: 0.8em;
+    color: #4B3923; /* Cor Secundária/Texto */
+}
+
+.tip-post .post-meta i {
+    color: #735A33; /* Cor Primária/Destaque */
+    margin-right: 5px;
+}
+
+/* === PÁGINA DE PRODUTOS (produtos.html) === */
+
+#products-main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#products-main #product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+#products-main #product-grid .product-card {
+    background-color: #FFFFFF;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+#products-main #product-grid .product-card .product-img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#products-main #product-grid .product-card h3 {
+    color: #735A33; /* Cor Primária/Destaque */
+    font-size: 1.2em;
+    margin: 0 0 5px 0;
+}
+
+#products-main #product-grid .product-card .product-description {
+    color: #666;
+    font-size: 0.9em;
+    height: 40px;
+    overflow: hidden;
+    margin: 0 0 15px 0;
+}
+
+#products-main #product-grid .product-card .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#products-main #product-grid .product-card .product-footer .price {
+    font-weight: 700;
+    color: #735A33; /* Cor Primária/Destaque */
+    font-size: 1.4em;
+}
+
+#products-main #product-grid .product-card .product-footer .buy-btn {
+    padding: 8px 12px;
+    background-color: #25D366;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+#products-main #product-grid .product-card .product-footer .buy-btn:hover {
+    background-color: #21B759; 
+}
+
+
+/* === RODAPÉ (GLOBAL) === */
+footer {
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.8em;
+    color: #4B3923; /* Cor Secundária/Texto */
+}
