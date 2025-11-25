@@ -1,39 +1,92 @@
 /*
  * ARQUIVO ÚNICO: ./assets/css/style.css
  * ESTILOS GLOBAIS, INDEX, AGENDAMENTO, SERVIÇOS, CONTATO, DEPOIMENTOS, DICAS E PRODUTOS.
+ * OTIMIZADO PARA RESPONSIVIDADE (>= 300px) & CONTRASTE DARK/LIGHT
  */
 
-/* === VARIÁVEIS DE COR UTILIZADAS (Para referência) === */
-/* Cor Primária/Destaque: #735A33 (Marrom Dourado Forte - Base da Logo) */
-/* Cor Secundária/Texto: #4B3923 (Marrom Escuro Profundo) */
-/* Fundo Principal: #F7ECE0 */
-/* Cinza Claro: #D9D9D9 */
-/* Branco: #FFFFFF */
-/* Preto: #000000 */
+/* === VARIÁVEIS DE COR === */
+:root {
+    --primary-color: #735A33;
+    --secondary-color: #4B3923;
+    --bg-body: #1e1d1d;
+    --bg-card: #FFFFFF;
+    --bg-nav: #e6c099;
+    --gray-light: #D9D9D9;
+    --text-light: #F7ECE0;
+}
 
-/* === ANIMAÇÕES E ESTILOS DA SPLASH SCREEN (CARREGAMENTO) === */
+/* === RESET BÁSICO E FLUIDEZ === */
+* {
+    box-sizing: border-box;
+}
 
-/* 1. Tela que cobre o viewport */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--secondary-color);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* === TIPOGRAFIA === */
+h1, h2, h3 {
+    font-family: 'Ruda', sans-serif;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* === SPLASH SCREEN (INDEX) === */
 #splash-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    background-color: #F7ECE0; /* Fundo Principal */
+    height: 100%;
+    background: linear-gradient(135deg, var(--bg-body) 0%, var(--secondary-color) 100%);
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     z-index: 9999;
-    opacity: 1;
-    transition: opacity 0.5s ease-out; /* Duração do fade-out */
+    transition: opacity 0.5s ease-out;
 }
 
 #splash-screen.fade-out {
     opacity: 0;
 }
 
-/* 2. Conteúdo principal invisível até a splash screen sair */
+#splash-logo img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid var(--primary-color);
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* === MAIN CONTENT === */
 .main-content {
     opacity: 0;
     transition: opacity 0.5s ease-in;
@@ -43,119 +96,132 @@
     opacity: 1;
 }
 
-/* 3. Animação do logo (ícone) */
-#splash-logo {
-    animation: pulse 1s infinite alternate; /* Animação de pulsar */
+/* === CONTAINERS E CARDS (UI CONTRAST) === */
+.service-item, 
+.contact-section, 
+.testimonial-card, 
+.tip-post, 
+.product-card,
+fieldset,
+#booking-form,
+#confirmation-message,
+.summary {
+    background-color: var(--bg-card);
+    color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 20px;
+    padding: 20px;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.1);
-    }
+/* Títulos dentro dos cards */
+.service-item h3, 
+.contact-section h2, 
+.testimonial-card h3,
+.product-card h3,
+legend,
+.summary h3 {
+    color: var(--primary-color);
+    margin-top: 0;
 }
 
-
-/* === ESTILOS GLOBAIS === */
-
-body {
-    font-family: 'Poppins', Arial, sans-serif;
-    background-color: #1e1d1d;
-    color: #4B3923; /* Cor Secundária/Texto */
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-}
-
-h1, h2, h3 {
-    color: #4B3923; /* Cor Secundária/Texto */
-    font-family: 'Ruda', sans-serif;
-    margin-bottom: 0.5em;
-}
-
-a {
-    color: #735A33; /* Cor Primária/Destaque */
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: #4B3923; /* Cor Secundária/Texto */
-}
-
-/* === CABEÇALHO (HEADER) E NAVEGAÇÃO === */
-
+/* === CABEÇALHO (HEADER) === */
 #site-header {
-    background-color: #1e1d1d;
-    padding: 40px 20px 20px;
+    background-color: var(--bg-body);
+    padding: 30px 15px 20px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     position: relative;
     max-width: 600px;
     margin: 0 auto;
 }
 
 #logo-principal {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 15px;
-    border: 4px solid #735A33; /* Cor Primária/Destaque */
+    margin: 0 auto 15px auto;
+    border: 4px solid var(--primary-color);
 }
 
 .greeting {
     font-family: 'Shadow Script', cursive;
-    font-size: 1.5em;
-    color: #4B3923; /* Cor Secundária/Texto */
+    font-size: 1.4em;
+    color: var(--text-light);
     margin: 0 0 5px 0;
 }
 
 #site-header h1 {
-    font-size: 2em;
+    font-size: 1.8em;
     margin: 0 0 10px 0;
-    color: #4B3923; /* Cor Secundária/Texto */
+    color: var(--text-light);
 }
 
-.cta-button {
-    background-color: #735A33; /* Cor Primária/Destaque */
-    color: #FFFFFF;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, transform 0.2s;
+#site-header p {
+    color: var(--gray-light);
+    font-size: 0.95em;
 }
 
-.cta-button:hover {
-    background-color: #5C4829; /* Cor Primária ligeiramente mais escura */
-    transform: translateY(-2px);
-    color: #FFFFFF;
-}
-
-/* Navegação */
+/* Botão Voltar */
 .back-link {
     position: absolute;
     top: 20px;
     left: 20px;
-    color: #4B3923; /* Cor Secundária/Texto */
+    color: var(--text-light);
     font-size: 1.5em;
-    line-height: 1;
+    padding: 10px;
+    z-index: 10;
+    transition: transform 0.2s;
 }
 
 .back-link:hover {
-    color: #735A33; /* Cor Primária/Destaque */
+    transform: translateX(-5px);
 }
 
-/* Grid de Navegação (index.html) */
+/* === BOTÕES E CTA === */
+.cta-button {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 10px auto 0;
+    width: fit-content;
+    transition: transform 0.2s;
+}
 
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.menu-btn {
+    display: block;
+    text-align: center;
+    background-color: var(--bg-nav);
+    color: var(--secondary-color);
+    padding: 12px;
+    border-radius: 5px;
+    margin: 20px auto;
+    max-width: 600px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.menu-btn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* === GRID DE NAVEGAÇÃO (HOME) === */
 #navigation-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -165,67 +231,62 @@ a:hover {
     margin: 0 auto;
 }
 
-#navigation-grid .nav-card {
+.nav-card {
+    background-color: var(--bg-nav);
+    color: var(--secondary-color);
+    padding: 20px 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    border: 1px solid #D9D9D9;
-    border-radius: 15px;
-    background-color: #e6c099;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
-#navigation-grid .nav-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+.nav-card:hover {
     transform: translateY(-5px);
-    border-color: #735A33; /* Cor Primária/Destaque */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-#navigation-grid .nav-card .card-icon {
-    color: #735A33; /* Cor Primária/Destaque */
-    font-size: 2.5em;
+.nav-card:active {
+    transform: scale(0.98);
+}
+
+.nav-card .card-icon {
+    font-size: 2.2em;
     margin-bottom: 10px;
 }
 
-#navigation-grid .nav-card .card-label {
-    font-weight: 700;
-    color: #4B3923; /* Cor Secundária/Texto */
+.card-label {
+    font-weight: 600;
+    font-size: 0.95em;
 }
 
-/* Ajuste para o último item (Depoimentos) no grid ímpar */
 #navigation-grid a:last-child {
     grid-column: 1 / -1;
-    max-width: 50%;
-    margin: 0 auto;
+    max-width: 100%;
 }
 
-/* === PÁGINA DE AGENDAMENTO (agendamento.html) === */
-
-#booking-main {
+/* === AGENDAMENTO === */
+#booking-main, #services-main, #tips-main, #products-main, #contact-main, #testimonials-main {
     max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
+    margin: 10px auto;
+    padding: 0 15px;
 }
 
 #booking-form fieldset {
-    border: 1px solid #D9D9D9;
+    border: 1px solid #eee;
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: #FFFFFF;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin: 0 0 20px 0;
 }
 
 #booking-form legend {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 700;
-    color: #735A33; /* Cor Primária/Destaque */
-    padding: 0 10px;
-    margin-left: -10px;
+    padding: 0 5px;
 }
 
 .booking-step {
@@ -236,530 +297,446 @@ a:hover {
     display: block;
 }
 
-.service-option {
-    display: block;
-    padding: 10px;
-    margin-bottom: 8px;
-    border: 1px solid #D9D9D9;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s;
-}
-
-.service-option:hover {
-    background-color: #F0EAD6; /* Cor ligeiramente mais clara que o Fundo Principal */
-}
-
-.service-option input[type="radio"]:checked + span,
-.service-option input[type="radio"]:checked {
-    color: #735A33; /* Cor Primária/Destaque */
-}
-
-.summary {
-    background-color: #F7ECE0;
-    border-left: 5px solid #735A33; /* Cor Primária/Destaque */
+/* Dropdown Customizado */
+.booking-dropdown {
+    width: 100%;
     padding: 15px;
-    margin-bottom: 20px;
+    font-size: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--secondary-color);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
+    appearance: none; 
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23735A33' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
+}
+
+/* Inputs Gerais */
+input[type="date"], 
+input[type="text"], 
+input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
 }
 
-.summary h3 {
-    margin-top: 0;
-    color: #4B3923; /* Cor Secundária/Texto */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--secondary-color);
 }
 
-.summary strong {
-    color: #735A33; /* Cor Primária/Destaque */
-    font-weight: 700;
-}
-
+/* Botões de Navegação */
 .step-navigation {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .step-navigation button {
-    padding: 10px 20px;
+    padding: 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
+    flex: 1;
+    font-size: 1em;
     transition: background-color 0.3s;
-    flex-grow: 1;
-    margin: 0 5px;
 }
 
 .step-navigation button:first-child {
-    background-color: #D9D9D9;
-    color: #4B3923; /* Cor Secundária/Texto */
+    background-color: var(--gray-light);
+    color: var(--secondary-color);
+}
+
+.step-navigation button:first-child:hover {
+    background-color: #c0c0c0;
 }
 
 .step-navigation button:last-child,
 .step-navigation button[type="submit"] {
-    background-color: #4B3923; /* Cor Secundária/Texto */
+    background-color: var(--secondary-color);
     color: #FFFFFF;
 }
 
-.step-navigation button:hover:not(:disabled) {
-    background-color: #735A33; /* Cor Primária/Destaque */
-    color: #FFFFFF;
+.step-navigation button:last-child:hover {
+    background-color: var(--primary-color);
 }
 
 .step-navigation button:disabled {
-    background-color: #D9D9D9;
-    color: #A0A0A0;
+    background-color: #eee;
+    color: #aaa;
     cursor: not-allowed;
 }
 
-/* Estilos de horário e data */
-input[type="date"] {
-    padding: 10px;
-    border: 1px solid #D9D9D9;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-}
-
+/* Grade de Horários */
 #available-times {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 8px;
     margin-top: 15px;
 }
 
 #available-times button {
     padding: 10px 5px;
-    border: 1px solid #735A33; /* Cor Primária/Destaque */
-    background-color: #FFFFFF;
-    color: #4B3923; /* Cor Secundária/Texto */
+    border: 1px solid var(--primary-color);
+    background-color: #fff;
+    color: var(--secondary-color);
     border-radius: 5px;
+    font-size: 0.9em;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
+    transition: all 0.2s;
 }
 
 #available-times button:hover {
-    background-color: #F0EAD6;
+    background-color: #f5f5f5;
 }
 
 #available-times button.selected {
-    background-color: #735A33; /* Cor Primária/Destaque */
-    color: #FFFFFF;
-    font-weight: 700;
-    border-color: #735A33; /* Cor Primária/Destaque */
+    background-color: var(--primary-color);
+    color: #fff;
 }
 
-/* Mensagem de sucesso */
-#confirmation-message {
+.placeholder-text {
+    grid-column: 1 / -1;
     text-align: center;
-    padding: 40px 20px;
-    background-color: #FFFFFF;
-    border: 1px solid #735A33; /* Cor Primária/Destaque */
-    border-radius: 10px;
-    margin-top: 20px;
+    color: #999;
+    font-style: italic;
 }
 
-#confirmation-message h2 {
-    color: #735A33; /* Cor Primária/Destaque */
-    font-size: 1.8em;
+.loading-message {
+    text-align: center;
+    color: var(--primary-color);
+    margin: 20px 0;
 }
 
-#confirmation-message .fa-check-circle {
-    margin-right: 10px;
-}
-
-.new-booking-btn {
-    display: inline-block;
-    margin-top: 20px;
-    background-color: #4B3923; /* Cor Secundária/Texto */
-    color: #FFFFFF;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: 500;
-}
-
-.new-booking-btn:hover {
-    background-color: #735A33; /* Cor Primária/Destaque */
-}
-
-
-/* === PÁGINA DE SERVIÇOS (servicos.html) === */
-
-#services-main {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-.service-category h2 {
-    border-left: 5px solid #735A33; /* Cor Primária/Destaque */
-    padding-left: 10px;
-    margin-bottom: 15px;
-}
-
-.service-item {
-    background-color: #FFFFFF;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-}
-
-.service-item h3 {
-    margin: 0 0 5px 0;
-    color: #735A33; /* Cor Primária/Destaque */
-    font-size: 1.1em;
-}
-
-.service-item .description {
-    font-size: 0.9em;
-    color: #666;
-    margin-bottom: 10px;
-}
-
+/* === SERVIÇOS === */
 .service-item .details {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #ccc;
     padding-bottom: 10px;
-    border-bottom: 1px dashed #D9D9D9;
 }
 
-.service-item .details .price {
+.service-item .price {
     font-weight: 700;
-    color: #735A33; /* Cor Primária/Destaque */
-    font-size: 1.2em;
+    color: var(--primary-color);
+    font-size: 1.1em;
 }
 
-.service-item .details .duration {
+.service-item .duration {
     font-size: 0.9em;
-    color: #4B3923; /* Cor Secundária/Texto */
+    color: #666;
+}
+
+.service-item .description {
+    margin: 10px 0;
+    color: #555;
 }
 
 .service-item .schedule-btn {
     display: block;
     text-align: center;
-    background-color: #735A33; /* Cor Primária/Destaque */
-    color: #FFFFFF;
-    padding: 8px;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px;
     border-radius: 5px;
-    font-weight: 500;
+    font-weight: 600;
     transition: background-color 0.3s;
 }
 
 .service-item .schedule-btn:hover {
-    background-color: #5C4829; /* Cor Primária mais escura */
-    color: #FFFFFF;
+    background-color: var(--secondary-color);
 }
 
-/* === PÁGINA DE CONTATO (contato.html) === */
-
-#contact-main {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-.contact-section {
-    background-color: #FFFFFF;
+/* Categorias de Serviços */
+#categories-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
     padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.service-category {
+    padding: 20px 0;
+}
+
+.back-btn-internal {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--gray-light);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-weight: 600;
+    transition: background-color 0.3s;
 }
 
-.contact-section h2 {
-    color: #735A33; /* Cor Primária/Destaque */
-    border-bottom: 2px solid #D9D9D9;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+.back-btn-internal:hover {
+    background-color: var(--primary-color);
+    color: #fff;
 }
 
+/* === CONTATO & MAPA === */
 .social-list {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.social-list li {
-    width: 100%;
+    margin: 0;
 }
 
 .social-icon-btn {
     display: flex;
     align-items: center;
-    padding: 10px 15px;
-    border-radius: 5px;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 8px;
     color: #FFFFFF;
-    font-weight: 500;
-    transition: opacity 0.3s;
-}
-
-.social-icon-btn i {
-    font-size: 1.2em;
-    margin-right: 10px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
 }
 
 .social-icon-btn:hover {
-    opacity: 0.9;
-    color: #FFFFFF;
+    transform: translateY(-2px);
 }
 
-.social-icon-btn.whatsapp {
-    background-color: #25D366; 
-}
-
-.social-icon-btn.instagram {
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
-}
-
-.social-icon-btn.phone {
-    background-color: #735A33; /* Cor Primária/Destaque */
-}
+.whatsapp { background-color: #25D366; }
+.instagram { background-color: #C13584; }
+.phone { background-color: var(--secondary-color); }
 
 .address {
-    font-size: 1em;
-    color: #4B3923; /* Cor Secundária/Texto */
-    margin-bottom: 15px;
-}
-
-.address small {
-    display: block;
-    color: #666;
-    margin-top: 5px;
+    text-align: center;
+    margin: 15px 0;
+    line-height: 1.8;
 }
 
 .map-container {
-    height: 250px;
-    overflow: hidden;
+    height: 300px;
     border-radius: 5px;
+    overflow: hidden;
+    background-color: #ddd;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 .map-container iframe {
+    position: absolute; /* Torna o iframe um bloco de posicionamento */
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    border: 0;
+    z-index: 5; /* Garante que o iframe fique acima de qualquer elemento de fundo do container */
 }
 
-/* === PÁGINA DE DEPOIMENTOS (depoimentos.html) === */
-
-#testimonials-main {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-#testimonial-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+/* === DEPOIMENTOS === */
 .testimonial-card {
-    background-color: #FFFFFF;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #D9D9D9;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .client-name {
     font-weight: 700;
-    color: #4B3923; /* Cor Secundária/Texto */
     font-size: 1.1em;
+    color: var(--primary-color);
 }
 
-.rating i.fa-star {
-    color: #735A33; /* Cor Primária/Destaque */
+.rating {
+    color: #FFD700;
 }
 
 .testimonial-quote {
     font-style: italic;
-    color: #4B3923; /* Cor Secundária/Texto */
-    margin: 10px 0;
+    margin: 15px 0;
+    padding-left: 15px;
+    border-left: 3px solid var(--primary-color);
+    color: #555;
 }
 
 .service-type {
-    display: block;
     font-size: 0.85em;
-    color: #735A33; /* Cor Primária/Destaque */
+    color: #888;
+    display: block;
     margin-top: 10px;
 }
 
-.menu-btn {
-    display: block;
-    text-align: center;
-    background-color: #4B3923; /* Cor Secundária/Texto */
-    color: #FFFFFF;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-weight: 500;
-    transition: background-color 0.3s;
-}
-
-.menu-btn:hover {
-    background-color: #735A33; /* Cor Primária/Destaque */
-}
-
-/* === PÁGINA DE DICAS (dicas.html) === */
-
-#tips-main {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-#tip-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
+/* === DICAS === */
 .tip-post {
-    background-color: #FFFFFF;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     display: flex;
-    align-items: flex-start;
     gap: 15px;
+    align-items: flex-start;
+    margin-bottom: 20px;
 }
 
 .tip-post .post-thumb {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0;
 }
 
-.tip-post .post-content {
-    flex-grow: 1;
+.post-content h3 {
+    margin-top: 0;
+    font-size: 1.1em;
 }
 
-.tip-post h3 {
-    font-size: 1em;
-    margin: 0 0 5px 0;
-    color: #735A33; /* Cor Primária/Destaque */
+.summary {
+    color: #555;
+    margin: 10px 0;
 }
 
-.tip-post .summary {
-    font-size: 0.9em;
-    color: #666;
-    margin: 0 0 10px 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.read-more {
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
 }
 
-.tip-post .read-more {
-    font-weight: 700;
-    color: #735A33; /* Cor Primária/Destaque */
+.post-meta {
+    font-size: 0.85em;
+    color: #888;
 }
 
-.tip-post .post-meta {
-    font-size: 0.8em;
-    color: #4B3923; /* Cor Secundária/Texto */
-}
-
-.tip-post .post-meta i {
-    color: #735A33; /* Cor Primária/Destaque */
-    margin-right: 5px;
-}
-
-/* === PÁGINA DE PRODUTOS (produtos.html) === */
-
-#products-main {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-#products-main #product-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-#products-main #product-grid .product-card {
-    background-color: #FFFFFF;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+/* === PRODUTOS === */
+.product-card {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-#products-main #product-grid .product-card .product-img {
+.product-img {
     width: 100%;
-    max-width: 150px;
-    height: auto;
+    height: 200px;
     object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
-#products-main #product-grid .product-card h3 {
-    color: #735A33; /* Cor Primária/Destaque */
-    font-size: 1.2em;
-    margin: 0 0 5px 0;
+.product-description {
+    color: #555;
+    margin: 10px 0;
 }
 
-#products-main #product-grid .product-card .product-description {
-    color: #666;
-    font-size: 0.9em;
-    height: 40px;
-    overflow: hidden;
-    margin: 0 0 15px 0;
-}
-
-#products-main #product-grid .product-card .product-footer {
+.product-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
 }
 
-#products-main #product-grid .product-card .product-footer .price {
+.product-footer .price {
+    font-size: 1.3em;
     font-weight: 700;
-    color: #735A33; /* Cor Primária/Destaque */
-    font-size: 1.4em;
+    color: var(--primary-color);
 }
 
-#products-main #product-grid .product-card .product-footer .buy-btn {
-    padding: 8px 12px;
+.product-footer .buy-btn {
+    padding: 8px 15px;
     background-color: #25D366;
-    color: #FFFFFF;
-    text-decoration: none;
+    color: #fff;
     border-radius: 5px;
-    font-weight: 500;
+    font-size: 0.9em;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     transition: background-color 0.3s;
 }
 
-#products-main #product-grid .product-card .product-footer .buy-btn:hover {
-    background-color: #21B759; 
+.product-footer .buy-btn:hover {
+    background-color: #1da851;
 }
 
+/* === CONFIRMAÇÃO === */
+.success-view {
+    text-align: center;
+    padding: 30px 20px;
+}
 
-/* === RODAPÉ (GLOBAL) === */
+.success-view h2 {
+    color: #25D366;
+    margin-bottom: 20px;
+}
+
+.success-view i {
+    font-size: 3em;
+}
+
+.new-booking-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.new-booking-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+/* === FOOTER === */
 footer {
     text-align: center;
-    padding: 20px 10px;
-    font-size: 0.8em;
-    color: #4B3923; /* Cor Secundária/Texto */
+    padding: 30px 10px;
+    font-size: 0.85em;
+    color: var(--text-light);
+    background-color: var(--bg-body);
+}
+
+footer a {
+    color: var(--primary-color);
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 350px) {
+    #navigation-grid,
+    #categories-menu {
+        grid-template-columns: 1fr;
+    }
+    
+    #available-times {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tip-post {
+        flex-direction: column;
+    }
+    
+    .tip-post .post-thumb {
+        width: 100%;
+        height: 150px;
+    }
+}
+
+/* === UTILITÁRIOS === */
+.hidden {
+    display: none !important;
 }

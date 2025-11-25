@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Ruda:wght@400;700&family=Shadow+Script&display=swap" rel="stylesheet" />
   </head>
-  </head>
   <body>
     <header id="site-header">
       <a href="../../index.html" class="back-link" aria-label="Voltar para o Menu Principal">
@@ -28,71 +27,44 @@
       <form id="booking-form" onsubmit="submitBooking(event)">
 
         <fieldset id="step-1" class="booking-step active">
-          <legend>1. Escolha o Serviço</legend>
+          <legend>1. Qual procedimento faremos?</legend>
           
-          <label class="service-option">
-            <input type="radio" name="service" value="pe-mao" onchange="updateService('pe-mao')" required />
-            Pé e Mão Completo (120 min) - R$ 45,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="somente-maos" onchange="updateService('somente-maos')" />
-            Somente Mãos (60 min) - R$ 25,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="somente-pes" onchange="updateService('somente-pes')" />
-            Somente Pés (90 min) - R$ 30,00
-          </label>
+          <p style="margin-bottom: 10px; font-size: 0.9em;">Selecione o serviço na lista abaixo:</p>
           
-          <label class="service-option">
-            <input type="radio" name="service" value="corte-escova" onchange="updateService('corte-escova')" />
-            Corte + Escova (90 min) - R$ 85,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="escova" onchange="updateService('escova')" />
-            Escova (60 min) - R$ 40,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="progressiva" onchange="updateService('progressiva')" />
-            Escova Progressiva (240 min) - R$ 180,00
-          </label>
-          
-          <label class="service-option">
-            <input type="radio" name="service" value="coloracao" onchange="updateService('coloracao')" />
-            Coloração (60 min) - R$ 50,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="reconstrucao" onchange="updateService('reconstrucao')" />
-            Reconstrução Capilar (40 min) - R$ 60,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="nutricao" onchange="updateService('nutricao')" />
-            Nutrição (40 min) - R$ 55,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="hidratacao" onchange="updateService('hidratacao')" />
-            Hidratação (40 min) - R$ 50,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="cronograma" onchange="updateService('cronograma')" />
-            Cronograma Capilar Completo (120 min) - R$ 150,00
-          </label>
+          <select id="service-select" class="booking-dropdown" onchange="updateServiceFromSelect(this)" required>
+            <option value="" disabled selected>Clique aqui para escolher...</option>
+            
+            <optgroup label="💅 Manicure e Pedicure">
+              <option value="pe-mao">Pé e Mão Completo (R$ 45,00)</option>
+              <option value="somente-maos">Somente Mãos (R$ 25,00)</option>
+              <option value="somente-pes">Somente Pés (R$ 30,00)</option>
+            </optgroup>
 
-          <label class="service-option">
-            <input type="radio" name="service" value="design" onchange="updateService('design')" />
-            Design de Sobrancelha (40 min) - R$ 25,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="buco" onchange="updateService('buco')" />
-            Buço com cera (15 min) - R$ 15,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="maquiagem-simples" onchange="updateService('maquiagem-simples')" />
-            Maquiagem Simples (60 min) - R$ 65,00
-          </label>
-          <label class="service-option">
-            <input type="radio" name="service" value="penteado" onchange="updateService('penteado')" />
-            Penteado (Consultar) - R$ 75,00
-          </label>
+            <optgroup label="💇‍♀️ Cabelos - Corte e Escova">
+              <option value="corte-escova">Corte + Escova (R$ 85,00)</option>
+              <option value="escova">Escova Simples (R$ 40,00)</option>
+              <option value="progressiva">Escova Progressiva (R$ 180,00)</option>
+            </optgroup>
+
+            <optgroup label="💆‍♀️ Cabelos - Tratamentos">
+              <option value="coloracao">Coloração (R$ 50,00)</option>
+              <option value="reconstrucao">Reconstrução Capilar (R$ 60,00)</option>
+              <option value="nutricao">Nutrição (R$ 55,00)</option>
+              <option value="hidratacao">Hidratação (R$ 50,00)</option>
+              <option value="cronograma">Cronograma Capilar (R$ 150,00)</option>
+            </optgroup>
+
+            <optgroup label="✨ Face e Sobrancelha">
+              <option value="design">Design de Sobrancelha (R$ 25,00)</option>
+              <option value="buco">Buço com cera (R$ 15,00)</option>
+            </optgroup>
+
+            <optgroup label="💄 Maquiagem">
+              <option value="maquiagem-simples">Maquiagem Simples (R$ 65,00)</option>
+              <option value="penteado">Penteado (R$ 75,00)</option>
+              <option value="maquiagem">Maquiagem Completa (Consultar)</option>
+            </optgroup>
+          </select>
 
           <div class="step-navigation">
             <button type="button" onclick="nextStep(2)" disabled id="next-step-1">Próximo</button>
@@ -102,13 +74,15 @@
         <fieldset id="step-2" class="booking-step">
           <legend>2. Escolha a Data e Horário</legend>
           
-          <label for="booking-date">Data:</label>
+          <label for="booking-date">Data Preferida:</label>
           <input type="date" id="booking-date" onchange="fetchAvailableTimes()" required />
           
-          <p id="time-loading" class="loading-message" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i> Buscando horários...</p>
+          <p id="time-loading" class="loading-message" style="display: none;">
+            <i class="fa-solid fa-spinner fa-spin"></i> Buscando horários...
+          </p>
           
           <div id="available-times">
-            <p class="placeholder-text">Selecione uma data para ver os horários.</p>
+            <p class="placeholder-text">Selecione uma data acima para ver os horários.</p>
           </div>
           
           <div class="step-navigation">
@@ -118,17 +92,17 @@
         </fieldset>
 
         <fieldset id="step-3" class="booking-step">
-          <legend>3. Confirmação e Contato</legend>
+          <legend>3. Seus Dados</legend>
           
-          <section class="summary">
-            <h3>Resumo do Agendamento</h3>
-            <p>Serviço: <strong id="summary-service"></strong></p>
-            <p>Data: <strong id="summary-date"></strong></p>
-            <p>Horário: <strong id="summary-time"></strong></p>
+          <section class="summary" style="padding: 15px; background-color: #f9f9f9; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="margin-top:0; font-size:1em;">Resumo:</h3>
+            <p style="margin:5px 0">Serviço: <strong id="summary-service">...</strong></p>
+            <p style="margin:5px 0">Data: <strong id="summary-date">...</strong></p>
+            <p style="margin:5px 0">Horário: <strong id="summary-time">...</strong></p>
           </section>
           
           <label for="client-name">Seu Nome:</label>
-          <input type="text" id="client-name" required />
+          <input type="text" id="client-name" placeholder="Digite seu nome completo" required />
           
           <label for="client-whatsapp">WhatsApp (Opcional):</label>
           <input type="tel" id="client-whatsapp" placeholder="(XX) XXXXX-XXXX" />
@@ -136,41 +110,38 @@
           <div class="step-navigation">
             <button type="button" onclick="prevStep(2)">Anterior</button>
             <button type="submit" disabled id="submit-booking">
-              Confirmar Agendamento
+              Agendar no WhatsApp
             </button>
           </div>
         </fieldset>
 
-        <section id="confirmation-message" class="booking-step success-view">
-          <h2><i class="fa-solid fa-check-circle"></i> Agendamento Confirmado!</h2>
-          <p>Seu horário está reservado com sucesso. Obrigado por agendar com **Paula Eliziane Tomé**!</p>
-          <p>Você será redirecionado para o WhatsApp com os detalhes para finalizar.</p>
-          <a href="#" onclick="resetBooking()" class="new-booking-btn">Novo Agendamento</a>
+        <section id="confirmation-message" class="booking-step success-view" style="display: none;">
+          <h2><i class="fa-solid fa-check-circle"></i> Tudo Certo!</h2>
+          <p>Seu pré-agendamento foi gerado.</p>
+          <p>Estamos te redirecionando para o WhatsApp para confirmar com a Paula...</p>
+          <a href="#" onclick="resetBooking()" class="new-booking-btn" style="display:block; margin-top:20px; color: var(--primary-color);">Fazer outro agendamento</a>
         </section>
         
       </form>
     </main>
+
+    <a href="../../index.html" class="menu-btn">Voltar para o Menu Principal</a>
     
     <footer>
-      <small>© 2025 -<a href="https://portfolioraposoofc.vercel.app" style="text-decoration: none; color: #735A33">Rapôso Web Dev</a> | Todos os direitos reservados.</small>
+      <small>© 2025 - <a href="https://portfolioraposoofc.vercel.app" style="text-decoration: none; color: #735A33">Rapôso Web Dev</a> | Todos os direitos reservados.</small>
     </footer>
 
     <script src="../js/script.js"></script>
     <script>
-      // Função auxiliar para formatar a data (opcional, dependendo do suporte de idioma)
-      function formatDateDisplay(dateString) {
-          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          // Adiciona 1 dia para corrigir o fuso horário que o input[type="date"] pode causar.
-          const date = new Date(dateString + 'T00:00:00'); 
-          return date.toLocaleDateString('pt-BR', options);
-      }
-
       // Define a data mínima para agendamento (A partir de amanhã)
       document.addEventListener('DOMContentLoaded', () => {
           const today = new Date();
-          today.setDate(today.getDate() + 1); // Garante que não se pode agendar para hoje
+          today.setDate(today.getDate() + 1); 
           const tomorrow = today.toISOString().split('T')[0];
-          document.getElementById('booking-date').setAttribute('min', tomorrow);
+          const dateInput = document.getElementById('booking-date');
+          if (dateInput) {
+              dateInput.setAttribute('min', tomorrow);
+          }
       });
     </script>
   </body>
